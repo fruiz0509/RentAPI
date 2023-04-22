@@ -10,6 +10,10 @@ namespace RentAPI.Models
         {
             _userRepository = userRepository;
         }
+        public Jwt()
+        {
+
+        }
 
         public string? Key { get; set; }
         public string? Issuer { get; set; }
@@ -33,7 +37,7 @@ namespace RentAPI.Models
 
                 var id = identity.Claims.FirstOrDefault(x => x.Type == "id").Value;
 
-                User? user = _userRepository.Get().FirstOrDefault(x => x.Id == Int16.Parse(id));
+                User? user = _userRepository.Get(Int16.Parse(id));
 
                 return new
                 {

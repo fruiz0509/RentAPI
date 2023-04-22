@@ -174,3 +174,5 @@ C:\Users\francisco.ruiz\Documents\Francisco\Own\RentAPI\obj\Debug\net6.0\RentAPI
 C:\Users\francisco.ruiz\Documents\Francisco\Own\RentAPI\obj\Debug\net6.0\ref\RentAPI.dll
 C:\Users\francisco.ruiz\Documents\Francisco\Own\RentAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\francisco.ruiz\Documents\Francisco\Own\RentAPI\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\VisualStudio2022\RentAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\VisualStudio2022\RentAPI\bin\Debug\net6.0\Newtonsoft.Json.dll

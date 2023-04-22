@@ -1,27 +1,38 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentAPI.Models;
 using RentAPI.Repository;
+using System.Security.Claims;
 
 namespace RentAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class RolesController : ControllerBase
     {
         private readonly IRepository<Role> _roleRepository;
-        private readonly Jwt _jwt;
 
-        public RolesController(IRepository<Role> roleRepository, Jwt jwt)
+        public RolesController(IRepository<Role> roleRepository)
         {
             _roleRepository = roleRepository;
-            _jwt = jwt;
         }
 
         [HttpGet]
         public IActionResult Get() 
         {
-            
+            bool validate = ValidateToken();
+            if (!validate)
+            {
+                return Ok(new 
+                {
+                    success = false,
+                    message = "Permisos insuficientes",
+                    result = ""
+                });
+            }
+
             try
             {
                 return Ok(new { message = "OK", response = _roleRepository.Get() });
@@ -93,6 +104,22 @@ namespace RentAPI.Controllers
             {
                 return Ok(new { message = ex.Message });
             }
+        }
+
+        public bool ValidateToken()
+        { 
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var token = Jwt.ValidarToken(identity);
+
+            if (!token.success) return token;
+
+            User user = token;
+            if (user.Id != 1)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

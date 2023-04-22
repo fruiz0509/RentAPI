@@ -21,30 +21,29 @@ namespace RentAPI.Controllers
         {
             try
             {
-                return StatusCode(StatusCodes.Status200OK, new { message = "OK", response = _roleRepository.Get() });
+                return Ok(new { message = "OK", response = _roleRepository.Get() });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message, response = _roleRepository.Get() });
+                return Ok( new { message = ex.Message});
             }
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Role role = _roleRepository.Get(id);
-            if(role == null)
-            {
-                return NotFound();
-            }
-
             try
             {
-                return StatusCode(StatusCodes.Status200OK, new { message =  "OK", response = role });
+                Role role = _roleRepository.Get(id);
+                if (role == null)
+                {
+                    return NotFound();
+                }
+                return Ok(new { message =  "OK", response = role });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+                return Ok(new { message = ex.Message });
             }
         }
 
@@ -55,11 +54,11 @@ namespace RentAPI.Controllers
             {
                 _roleRepository.Add(role);
                 _roleRepository.Save();
-                return StatusCode(StatusCodes.Status200OK, new { message = "OK" });
+                return Ok(new { message = "OK" });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+                return Ok(new { message = ex.Message });
             }
         }
 
@@ -70,11 +69,11 @@ namespace RentAPI.Controllers
             {
                 _roleRepository.Update(role);
                 _roleRepository.Save();
-                return StatusCode(StatusCodes.Status200OK, new { message = "OK" });
+                return Ok(new { message = "OK" });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+                return Ok(new { message = ex.Message });
             }
         }
 
@@ -85,11 +84,11 @@ namespace RentAPI.Controllers
             {
                 _roleRepository.Delete(id);
                 _roleRepository.Save();
-                return StatusCode(StatusCodes.Status200OK, new { message = "OK" });
+                return Ok(new { message = "OK" });
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status200OK, new { message = ex.Message });
+                return Ok(new { message = ex.Message });
             }
         }
     }

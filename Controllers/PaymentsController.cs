@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentAPI.Models;
 using RentAPI.Repository;
@@ -8,12 +7,12 @@ namespace RentAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class PaymentsController : ControllerBase
     {
-        private readonly IRepository<User> _userRepository;
-        public UsersController(IRepository<User> userRepository)
+        private readonly IRepository<Payment> _paymentRepository;
+        public PaymentsController(IRepository<Payment> paymentRepository)
         {
-            _userRepository = userRepository;
+            _paymentRepository = paymentRepository;
         }
 
         [HttpGet]
@@ -21,7 +20,7 @@ namespace RentAPI.Controllers
         {
             try
             {
-                return Ok(new { message = "OK", response = _userRepository.Get() });
+                return Ok(new { message = "OK", response = _paymentRepository.Get() });
             }
             catch (Exception ex)
             {
@@ -30,17 +29,17 @@ namespace RentAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id) 
+        public IActionResult Get(int id)  
         {
             try
             {
-                User user = _userRepository.Get(id);
-                if (user == null)
+                Payment payment = _paymentRepository.Get(id);
+                if (payment == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(new { message = "OK", response = user });
+                return Ok(new { message = "OK", response = payment });
             }
             catch (Exception ex)
             {
@@ -50,12 +49,12 @@ namespace RentAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] User user) 
+        public IActionResult Post([FromBody] Payment payment) 
         {
             try
             {
-                _userRepository.Add(user);
-                _userRepository.Save();
+                _paymentRepository.Update(payment);
+                _paymentRepository.Save();
                 return Ok(new { message = "OK" });
             }
             catch (Exception ex)
@@ -65,18 +64,19 @@ namespace RentAPI.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] User user)
+        public IActionResult Put([FromBody] Payment payment)
         {
             try
             {
-                _userRepository.Update(user);
-                _userRepository.Save();
+                _paymentRepository.Update(payment);
+                _paymentRepository.Save();
                 return Ok(new { message = "OK" });
             }
             catch (Exception ex)
             {
                 return Ok(new { message = ex.Message });
             }
+        
         }
 
         [HttpDelete("{id}")]
@@ -84,8 +84,8 @@ namespace RentAPI.Controllers
         {
             try
             {
-                _userRepository.Delete(id);
-                _userRepository.Save();
+                _paymentRepository.Delete(id);
+                _paymentRepository.Save();
                 return Ok(new { message = "OK" });
             }
             catch (Exception ex)

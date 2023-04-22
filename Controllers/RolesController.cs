@@ -10,15 +10,18 @@ namespace RentAPI.Controllers
     public class RolesController : ControllerBase
     {
         private readonly IRepository<Role> _roleRepository;
+        private readonly Jwt _jwt;
 
-        public RolesController(IRepository<Role> roleRepository)
+        public RolesController(IRepository<Role> roleRepository, Jwt jwt)
         {
             _roleRepository = roleRepository;
+            _jwt = jwt;
         }
 
         [HttpGet]
         public IActionResult Get() 
         {
+            
             try
             {
                 return Ok(new { message = "OK", response = _roleRepository.Get() });

@@ -8,5 +8,6 @@
         void Update(TEntity data);
         void Delete(int id);
         void Save();
+        
     }
 }

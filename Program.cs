@@ -17,7 +17,7 @@ builder.Services.AddDbContext<RentDbContext>(options => options.UseSqlServer(
 ));
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-//Configuración para incluir JWT
+//Configuraciï¿½n para incluir JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters

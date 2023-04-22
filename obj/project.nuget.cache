@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oEO6Xx2qt9Gmlvq5buWSHIBKBiL1T8ixFoB+ARMXh4mCXeWcNWq7ruRHMURwdnhZq+AfQ2C8WaRmkkSQrQnZsQ==",
+  "dgSpecHash": "yijJbN75QB2mZPnY3cEhLx5zKsXFXzpvUvkNef+fSdl7ap15P+bA4RHbI1tzXM6W9WUhN69tUzmfaulxdoi3aQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\francisco.ruiz\\Documents\\Francisco\\Own\\RentAPI\\RentAPI.csproj",
   "expectedPackageFiles": [
@@ -47,7 +47,7 @@
     "C:\\Users\\francisco.ruiz\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\francisco.ruiz\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\francisco.ruiz\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
-    "C:\\Users\\francisco.ruiz\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\francisco.ruiz\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\francisco.ruiz\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
     "C:\\Users\\francisco.ruiz\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
     "C:\\Users\\francisco.ruiz\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",

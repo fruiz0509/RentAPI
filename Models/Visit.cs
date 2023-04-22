@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace RentAPI.Models;
 
@@ -20,8 +21,8 @@ public partial class Visit
     public DateTime? Modified { get; set; }
 
     public int? ModifiedBy { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<Rent> Rents { get; set; } = new List<Rent>();
-
+    [JsonIgnore]
     public virtual User? User { get; set; }
 }

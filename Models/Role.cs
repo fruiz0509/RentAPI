@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace RentAPI.Models;
 
@@ -16,6 +17,6 @@ public partial class Role
     public DateTime? Modified { get; set; }
 
     public int? ModifiedBy { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<User> Users { get; set; } = new List<User>();
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RentAPI.Models;
 using RentAPI.Repository;
@@ -7,6 +8,7 @@ namespace RentAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VisitsController : ControllerBase
     {
         private readonly IRepository<Visit> _visitRepository;

@@ -1,19 +1,18 @@
-﻿using RentAPI.Repository;
+﻿using RentAPI.Controllers;
+using RentAPI.Repository;
 using System.Security.Claims;
 
 namespace RentAPI.Models
 {
     public class Jwt
     {
-        private static  IRepository<User>? _userRepository;
+        private readonly IRepository<User>? _userRepository;
         public Jwt(IRepository<User> userRepository)
         {
             _userRepository = userRepository;
         }
-        public Jwt()
-        {
 
-        }
+        public Jwt() { }
 
         public string? Key { get; set; }
         public string? Issuer { get; set; }
@@ -21,7 +20,7 @@ namespace RentAPI.Models
         public string? Subject { get; set; }
 
         //Validar que se recibe un token valido
-        public static dynamic ValidarToken(ClaimsIdentity identity) 
+        public dynamic ValidarToken(ClaimsIdentity identity) 
         {
             try
             {

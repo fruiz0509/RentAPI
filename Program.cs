@@ -15,7 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<RentDbContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("connectionSQL")
 ));
-builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddTransient<Jwt>();
 
 //Configuraci�n para incluir JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

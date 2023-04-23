@@ -13,25 +13,33 @@ namespace RentAPI.Controllers
     public class RolesController : ControllerBase
     {
         private readonly IRepository<Role> _roleRepository;
+        private readonly Jwt _jwt;
 
-        public RolesController(IRepository<Role> roleRepository)
+        public RolesController(IRepository<Role> roleRepository, Jwt jwt)
         {
             _roleRepository = roleRepository;
+            _jwt = jwt;
         }
 
         [HttpGet]
         public IActionResult Get() 
         {
-            bool validate = ValidateToken();
-            if (!validate)
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var token = _jwt.ValidarToken(identity);
+
+            if (!token.success) return token;
+
+            User user = token.result;
+            if (user.Id != 1)
             {
-                return Ok(new 
+                return Ok(new
                 {
                     success = false,
-                    message = "Permisos insuficientes",
-                    result = ""
+                    message = "No tienes permisos",
+                    response = ""
                 });
             }
+
 
             try
             {
@@ -106,20 +114,5 @@ namespace RentAPI.Controllers
             }
         }
 
-        public bool ValidateToken()
-        { 
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var token = Jwt.ValidarToken(identity);
-
-            if (!token.success) return token;
-
-            User user = token;
-            if (user.Id != 1)
-            {
-                return false;
-            }
-
-            return true;
-        }
     }
 }

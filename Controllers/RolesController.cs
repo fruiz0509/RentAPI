@@ -21,8 +21,7 @@ namespace RentAPI.Controllers
             _jwt = jwt;
         }
 
-        [HttpGet]
-        public IActionResult Get() 
+        private dynamic ValidateUserRol()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             var token = _jwt.ValidarToken(identity);
@@ -32,14 +31,31 @@ namespace RentAPI.Controllers
             User user = token.result;
             if (user.Id != 1)
             {
-                return Ok(new
+                return new
                 {
                     success = false,
                     message = "No tienes permisos",
                     response = ""
-                });
+                };
             }
 
+            return new
+            {
+                success = true,
+                message = "Acceso concedido",
+                response = ""
+            };
+        }
+
+        [HttpGet]
+        public IActionResult Get() 
+        {
+
+            var response = ValidateUserRol();
+            if (!response.success)
+            {
+                return Ok(new { success = true, message = "No tienes permisos", response = "" });
+            }
 
             try
             {
@@ -54,6 +70,12 @@ namespace RentAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            var response = ValidateUserRol();
+            if (!response.success)
+            {
+                return Ok(new { success = true, message = "No tienes permisos", response = "" });
+            }
+
             try
             {
                 Role role = _roleRepository.Get(id);
@@ -72,6 +94,12 @@ namespace RentAPI.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Role role)
         {
+            var response = ValidateUserRol();
+            if (!response.success)
+            {
+                return Ok(new { success = true, message = "No tienes permisos", response = "" });
+            }
+
             try
             {
                 _roleRepository.Add(role);
@@ -87,6 +115,12 @@ namespace RentAPI.Controllers
         [HttpPut]
         public IActionResult Put([FromBody] Role role)
         {
+            var response = ValidateUserRol();
+            if (!response.success)
+            {
+                return Ok(new { success = true, message = "No tienes permisos", response = "" });
+            }
+
             try
             {
                 _roleRepository.Update(role);
@@ -102,7 +136,14 @@ namespace RentAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            var response = ValidateUserRol();
+            if (!response.success)
+            {
+                return Ok(new { success = true, message = "No tienes permisos", response = "" });
+            }
+
             try
+
             {
                 _roleRepository.Delete(id);
                 _roleRepository.Save();
